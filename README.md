@@ -34,7 +34,8 @@
 
 3. unaryInvoke(java.lang.Math,abs,int,-3)
 
-   ![image](https://github.com/user-attachments/assets/2b30fa08-f623-4e32-afe8-bf9961b8c6c4)
+   ![image](https://github.com/user-attachments/assets/84b8425f-56c7-4756-a338-5e9fa99f8bfa)
+
 
 4. 
 
