@@ -72,6 +72,11 @@ public class HttpServer {
     }
 
     private static String responseConsulta(String path) {
+        String igual = path.split("=")[1];
+        String comando = igual.split("\\(")[0];
+        if(comando.startsWith("pi")){
+            return String.valueOf(Math.PI);
+        }
         return "error";
     }
 }

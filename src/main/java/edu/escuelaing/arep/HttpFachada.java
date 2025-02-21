@@ -1,10 +1,15 @@
 package edu.escuelaing.arep;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 
 public class HttpFachada {
+
+    private static final String USER_AGENT = "Mozilla/5.0";
+    private static final String GET_URL = "http://localhost:45000";
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = null;
         try {
@@ -90,7 +95,42 @@ public class HttpFachada {
                 +response.toString();
     }
 
-    private static String connectHttpServer(String path) {
-        return "";
+    private static String connectHttpServer(String path) throws IOException {
+        URL obj = new URL(GET_URL + path.replace("consulta","compreflex"));
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+
+        //The following invocation perform the connection implicitly before getting the code
+        int responseCode = con.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // print result
+            System.out.println(response.toString());
+            return "HTTP/1.1 200 OK\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "\r\n"
+                    +response.toString();
+
+        } else {
+            System.out.println("GET request not worked");
+            return "HTTP/1.1 400 BAD REQUEST\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "\r\n";
+        }
+
     }
+
 }
+
