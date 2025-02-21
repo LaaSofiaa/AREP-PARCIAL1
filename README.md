@@ -43,7 +43,8 @@ Nos conectamos al navegador por este link: http://localhost:35000/cliente
 4. binaryInvoke(java.lang.Math,max,double,4.5,double,-3.7)
 
    ![image](https://github.com/user-attachments/assets/ada53fdc-ddfe-4455-8fef-fda7d2e7644a)
-   ![image](https://github.com/user-attachments/assets/607f1dde-2216-4faa-a07f-79532dc89de4)
+   ![image](https://github.com/user-attachments/assets/c621daac-2b24-40c8-8de6-ae5aff799c93)
+
 
 
 
