@@ -2,8 +2,10 @@ package edu.escuelaing.arep;
 
 import java.net.*;
 import java.io.*;
+import java.util.Arrays;
+
 public class HttpServer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(45000);
@@ -71,11 +73,15 @@ public class HttpServer {
         serverSocket.close();
     }
 
-    private static String responseConsulta(String path) {
+    private static String responseConsulta(String path) throws ClassNotFoundException {
         String igual = path.split("=")[1];
         String comando = igual.split("\\(")[0];
         if(comando.startsWith("pi")){
             return String.valueOf(Math.PI);
+        }else if(comando.startsWith("Class")){
+            String clase = igual.split("\\(")[1].split("\\)")[0];
+            Class c = Class.forName(clase);
+            return Arrays.toString(c.getDeclaredFields())+ Arrays.toString(c.getDeclaredMethods());
         }
         return "error";
     }
