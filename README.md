@@ -23,6 +23,8 @@
 
 ### Pruebas
 
+Nos conectamos al navegador por este link: http://localhost:35000/cliente
+
 1. Class(java.lang.Math)
 
    ![image](https://github.com/user-attachments/assets/f1cd0970-cec7-4cff-b0f5-013472486387)
@@ -37,6 +39,13 @@
    ![image](https://github.com/user-attachments/assets/84b8425f-56c7-4756-a338-5e9fa99f8bfa)
 
    ![image](https://github.com/user-attachments/assets/34dc7775-1b12-4868-864c-f68a542b5c62)
+
+4. binaryInvoke(java.lang.Math,max,double,4.5,double,-3.7)
+
+   ![image](https://github.com/user-attachments/assets/ada53fdc-ddfe-4455-8fef-fda7d2e7644a)
+   ![image](https://github.com/user-attachments/assets/607f1dde-2216-4faa-a07f-79532dc89de4)
+
+
 
 
 
