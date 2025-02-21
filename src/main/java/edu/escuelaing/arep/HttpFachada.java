@@ -1,9 +1,6 @@
 package edu.escuelaing.arep;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -63,10 +60,10 @@ public class HttpFachada {
                         "<html>" +
                         "<head>" +
                         "<meta charset=\"UTF-8\">" +
-                        "<title>HttpServer</title>\n" +
+                        "<title>HttpFachada</title>\n" +
                         "</head>" +
                         "<body>" +
-                        "<h1>Funciona Else HttpServer</h1>" +
+                        "<h1>Funciona Else HttpFachada</h1>" +
                         "</body>" +
                         "</html>";
             }
@@ -78,8 +75,19 @@ public class HttpFachada {
         serverSocket.close();
     }
 
-    private static String getStaticFile() {
-        return "";
+    private static String getStaticFile() throws IOException {
+        BufferedReader in = new BufferedReader(new FileReader("src/main/java/resources/index.html"));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        return "HTTP/1.1 200 OK\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                +response.toString();
     }
 
     private static String connectHttpServer(String path) {
