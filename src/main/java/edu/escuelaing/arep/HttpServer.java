@@ -1,11 +1,13 @@
 package edu.escuelaing.arep;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.*;
 import java.io.*;
 import java.util.Arrays;
 
 public class HttpServer {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(45000);
@@ -73,15 +75,26 @@ public class HttpServer {
         serverSocket.close();
     }
 
-    private static String responseConsulta(String path) throws ClassNotFoundException {
+    private static String responseConsulta(String path) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         String igual = path.split("=")[1];
         String comando = igual.split("\\(")[0];
         if(comando.startsWith("pi")){
             return String.valueOf(Math.PI);
         }else if(comando.startsWith("Class")){
             String clase = igual.split("\\(")[1].split("\\)")[0];
+            System.out.println(clase);
             Class c = Class.forName(clase);
             return Arrays.toString(c.getDeclaredFields())+ Arrays.toString(c.getDeclaredMethods());
+        }else if(comando.startsWith("invoke")){
+            String clase = igual.split("\\(")[1].split("\\)")[0].split(",")[0];
+            System.out.println(clase);
+            String metodo = igual.split("\\(")[1].split("\\)")[0].split(",")[1];
+            System.out.println(metodo);
+            Class c = Class.forName(clase);
+            System.out.println(c);
+            Method m = c.getMethod(metodo);
+            System.out.println(m);
+            return m.invoke(null).toString();
         }
         return "error";
     }
