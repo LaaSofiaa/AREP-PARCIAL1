@@ -95,7 +95,48 @@ public class HttpServer {
             Method m = c.getMethod(metodo);
             System.out.println(m);
             return m.invoke(null).toString();
+        }else if(comando.startsWith("unaryInvoke")){
+            String clase = igual.split("\\(")[1].split("\\)")[0].split(",")[0];
+            //System.out.println(clase);
+            String metodo = igual.split("\\(")[1].split("\\)")[0].split(",")[1];
+            String tipoParam = igual.split("\\(")[1].split("\\)")[0].split(",")[2];
+            System.out.println(tipoParam);
+            String valorParam = igual.split("\\(")[1].split("\\)")[0].split(",")[3];
+            System.out.println(valorParam);
+            //System.out.println(metodo);
+            Class c = Class.forName(clase);
+            //System.out.println(c);
+            Method m = c.getMethod(metodo,getTypeParam(tipoParam));
+            //System.out.println(m);
+            return m.invoke(null, getCasting(tipoParam,valorParam)).toString();
         }
         return "error";
     }
+
+    private static Object getCasting(String tipoParam, String valorParam) {
+        if (tipoParam.equals("int")) {
+            return Integer.valueOf(valorParam);
+        } else if (tipoParam.equals("double")){
+            return Double.valueOf(valorParam);
+        }else if(tipoParam.equals("String")){
+            return String.valueOf((valorParam));
+        }else{
+            return null;
+        }
+    }
+
+    private static Class<?> getTypeParam(String tipoParam) {
+        if (tipoParam.equals("int")) {
+            return int.class;
+        } else if (tipoParam.equals("double")){
+            return double.class;
+        }else if(tipoParam.equals("String")){
+            return String.class;
+        }else{
+            return null;
+        }
+    }
 }
+
+
+
