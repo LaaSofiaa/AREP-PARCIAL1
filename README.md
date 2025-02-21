@@ -3,7 +3,7 @@
 
 1. Primero clonamos el repositorio y luego accedemos a la carpeta
 
-    https://github.com/LaaSofiaa/AREP-PARCIAL1.git
+    git clone https://github.com/LaaSofiaa/AREP-PARCIAL1.git
    
     cd AREP-PARCIAL1
 
