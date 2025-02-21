@@ -109,6 +109,24 @@ public class HttpServer {
             Method m = c.getMethod(metodo,getTypeParam(tipoParam));
             //System.out.println(m);
             return m.invoke(null, getCasting(tipoParam,valorParam)).toString();
+        }else if(comando.startsWith("binaryInvoke")){
+            String clase = igual.split("\\(")[1].split("\\)")[0].split(",")[0];
+            //System.out.println(clase);
+            String metodo = igual.split("\\(")[1].split("\\)")[0].split(",")[1];
+            String tipoParam = igual.split("\\(")[1].split("\\)")[0].split(",")[2];
+            System.out.println(tipoParam);
+            String valorParam = igual.split("\\(")[1].split("\\)")[0].split(",")[3];
+            System.out.println(valorParam);
+            String tipoParam1 = igual.split("\\(")[1].split("\\)")[0].split(",")[2];
+            System.out.println(tipoParam);
+            String valorParam1 = igual.split("\\(")[1].split("\\)")[0].split(",")[3];
+            System.out.println(valorParam);
+            //System.out.println(metodo);
+            Class c = Class.forName(clase);
+            //System.out.println(c);
+            Method m = c.getMethod(metodo,getTypeParam(tipoParam),getTypeParam(tipoParam1));
+            //System.out.println(m);
+            return m.invoke(null, getCasting(tipoParam,valorParam),getCasting(tipoParam1,valorParam1)).toString();
         }
         return "error";
     }
